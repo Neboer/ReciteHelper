@@ -1,0 +1,51 @@
+@keyframes forwarder {
+    0% {
+        left: 0;
+        opacity: 1
+    }
+    49% {
+        left: -2rem;
+        opacity: 0
+    }
+    51% {
+        left: 2rem;
+        opacity: 0
+    }
+    100% {
+        left: 0;
+        opacity: 1
+    }
+}
+
+@keyframes backender {
+    0% {
+        left: 0;
+        opacity: 1
+    }
+    49% {
+        left: 2rem;
+        opacity: 0
+    }
+    51% {
+        left: -2rem;
+        opacity: 0
+    }
+    100% {
+        left: 0;
+        opacity: 1
+    }
+}
+
+
+
+.next {
+    position: relative !important;
+    animation-name: forwarder;
+    animation-duration: 500ms;
+}
+
+.prev {
+    position: relative !important;
+    animation-name: backender;
+    animation-duration: 500ms;
+}
