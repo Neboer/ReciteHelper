@@ -2,19 +2,19 @@ import React from 'react';
 import './App.css';
 import {AwesomeButton} from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
-import {InitAnsList, InitQuestionList, GetAnswerAndType} from "./toolbox"
+import {GeneratePaperList} from "./toolbox"
 import MultiSelect from "@khanacademy/react-multi-select";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {word: "?", pron: "?", pingjia: true, selectQuestionRange: ["nl","ln","gl","lg"]};
+        this.state = {word: "?", pron: "?", pingjia: true, selectQuestionRange: ["pngl","lpng","pial","lpia"]};
         this.nextQuesAndRender = this.nextQuesAndRender.bind(this);
         this.previousQuesAndRender = this.previousQuesAndRender.bind(this);
         this.showAnswer = this.showAnswer.bind(this);
-        this.answerList = InitAnsList();
-        this.questionList = InitQuestionList(this.answerList);
+        this.changeQuestionRange = this.changeQuestionRange.bind(this);
         this.current_question_index = 0;
+        this.paperList = GeneratePaperList(this.state.selectQuestionRange)
     }
 
     componentDidMount() {
@@ -22,14 +22,17 @@ class App extends React.Component {
     }
 
     renderCurrentQuestion() {
-        // this.current_question_index++;
-        let question = this.questionList[this.current_question_index];
-        let [type, answer] = GetAnswerAndType(question, this.answerList);
-        this.answer = answer;
-        if (type === 1) {
-            this.setState({word: question, pron: "?"})
+        let current_problem = this.paperList[this.current_question_index];
+        this.answer = current_problem.Answer;
+        if (current_problem.Type === "pngl" || current_problem.Type === "pial") {
+            this.setState({word: current_problem.Question, pron: "?"})
         } else {
-            this.setState({word: "?", pron: question})
+            this.setState({word: "?", pron: current_problem.Question})
+        }
+        if (current_problem.Type === "pngl" || current_problem.Type === "lpng"){
+            this.setState({pingjia:true})
+        } else {
+            this.setState({pingjia:false})
         }
     }
 
@@ -41,7 +44,6 @@ class App extends React.Component {
         }
     }
 
-
     nextQuesAndRender() {
         this.current_question_index = this.current_question_index + 1;
         this.renderCurrentQuestion();
@@ -52,15 +54,17 @@ class App extends React.Component {
         this.renderCurrentQuestion();
     }
 
-    // 设置出题范围。
-    setQuestionRange() {
-
+    changeQuestionRange(selected_range) {
+        if (selected_range.length > 0){
+            this.answer = "";
+            this.current_question_index = 0;
+            this.setState({word:"",pron:""});
+            this.setState({selectQuestionRange:selected_range},() => {
+                this.paperList = GeneratePaperList(this.state.selectQuestionRange);
+                this.renderCurrentQuestion();
+            });
+        }
     }
-
-    handleChange(selectedOption) {
-        this.setState({ selectedOption });
-        console.log(`Option selected:`, selectedOption);
-    };
 
     render() {
         return (
@@ -70,13 +74,13 @@ class App extends React.Component {
                 </div>
                 <MultiSelect
                     options={[
-                        {label: "平假名-罗马音", value: "gl"},
-                        {label: "罗马音-平假名", value: "lg"},
-                        {label: "片假名-罗马音", value: "nl"},
-                        {label: "罗马音-片假名",value:"ln"}
+                        {label: "平假名-罗马音", value: "pngl"},
+                        {label: "罗马音-平假名", value: "lpng"},
+                        {label: "片假名-罗马音", value: "pial"},
+                        {label: "罗马音-片假名", value:"lpia"}
                     ]}
                     selected={this.state.selectQuestionRange}
-                    onSelectedChanged={selected => {this.setState({selectQuestionRange:selected})}}
+                    onSelectedChanged={this.changeQuestionRange}
                     overrideStrings={{
                         selectSomeItems: "请至少选择一个练习项目",
                         allItemsAreSelected: "已经选择全部练习项目",
@@ -88,7 +92,7 @@ class App extends React.Component {
                     <div onClick={this.showAnswer}>
                         <div id={"linter"}>{this.state.pingjia?"平假名":"片假名"}</div>
                         <div id={'progress'}>
-                            {this.current_question_index + 1} / {this.questionList.length}
+                            {this.current_question_index + 1} / {this.paperList.length}
                         </div>
                         <div id={'pron'}>
                             {this.state.pron}
@@ -101,28 +105,12 @@ class App extends React.Component {
                                    disabled={this.current_question_index === 0}
                                    onReleased={this.previousQuesAndRender}>上一个</AwesomeButton>
                     <AwesomeButton type="primary" className={'btnner'} id={'next'}
-                                   disabled={this.current_question_index === this.questionList.length - 1}
+                                   disabled={this.current_question_index === this.paperList.length - 1}
                                    onReleased={this.nextQuesAndRender}>下一个</AwesomeButton>
                 </div>
             </div>
         );
     }
 }
-
-//
-// function App() {
-//     let whole = InitAnsList();
-//     let question = InitQuestionList(whole);
-//     this.prop.pron = "?";
-//     this.prop.word = "?";
-//     let current_question_index = 0;
-//     let [pos, qus] = GetAnswerAndType(question[current_question_index], whole);
-//     if (pos === 0) {
-//         this.prop.word = qus;
-//     } else {
-//         this.prop.pron = qus;
-//     }
-//
-// }
 
 export default App;

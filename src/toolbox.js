@@ -1,9 +1,5 @@
 import SOR from "./nihongjin.json"
 
-export function InitAnsList() {
-    return SOR
-}
-
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -23,20 +19,47 @@ function shuffle(array) {
     return array;
 }
 
-export function InitQuestionList(ans_list) {
-    let que_list = [];
-    for (let i = 0; i <= ans_list.length - 1; i++) {
-        que_list.push(ans_list[i][0], ans_list[i][1])
+/**
+ *
+ * @param selectQuestionRange ["pngl","lpng","pial","lpia"]
+ * @constructor
+ * @return []{Type:"pngl",Question:"あ",Answer:"a"}
+ */
+export function GeneratePaperList(selectQuestionRange) {
+    let png = [];
+    let pia = [];
+    let luo = [];
+    let FinalList = [];
+    for(let lis of SOR){
+        png.push(lis[1]);
+        pia.push(lis[2]);
+        luo.push(lis[0]);
     }
-    return shuffle(que_list)
-}
-
-export function GetAnswerAndType(item, ans_list) {
-    for (let i of ans_list) {
-        if (i[0] === item) {
-            return [0, i[1]]
-        } else if (i[1] === item) {
-            return [1, i[0]]
+    if (selectQuestionRange.includes("pngl")){
+        for(let index in png){
+            if(png.hasOwnProperty(index)){
+                FinalList.push({Type: "pngl",Question:png[index],Answer:luo[index]})
+            }
+        }
+    }    if (selectQuestionRange.includes("lpng")){
+        for(let index in luo){
+            if(luo.hasOwnProperty(index)){
+                FinalList.push({Type: "lpng",Question:luo[index],Answer:png[index]})
+            }
+        }
+    }    if (selectQuestionRange.includes("pial")){
+        for(let index in pia){
+            if(pia.hasOwnProperty(index)){
+                FinalList.push({Type: "pial",Question:pia[index],Answer:luo[index]})
+            }
+        }
+    }    if (selectQuestionRange.includes("lpia")){
+        for(let index in luo){
+            if(luo.hasOwnProperty(index)){
+                FinalList.push({Type: "lpia",Question:luo[index],Answer:pia[index]})
+            }
         }
     }
+    shuffle(FinalList);
+    return FinalList
 }
