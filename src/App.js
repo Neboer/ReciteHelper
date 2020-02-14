@@ -79,9 +79,6 @@ class App extends React.Component {
                     number: "num-next"
                 }
             }
-        } else {
-            // 如果已经显示答案，那就都给我运动！
-            this.current_question_index = this.current_question_index + 1;
         }
         this.setState({animClass: updater});
         setTimeout(function () {
