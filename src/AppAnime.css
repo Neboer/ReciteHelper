@@ -1,51 +1,101 @@
 @keyframes forwarder {
     0% {
-        left: 0;
+        transform: translateX(0rem);
         opacity: 1
     }
     49% {
-        left: -2rem;
+        transform: translateX(-2rem);
         opacity: 0
     }
     51% {
-        left: 2rem;
+        transform: translateX(2rem);
         opacity: 0
     }
     100% {
-        left: 0;
+        transform: translateX(0rem);
         opacity: 1
     }
 }
 
-@keyframes backender {
+@keyframes backwarder {
     0% {
-        left: 0;
+        transform: translateX(0);
         opacity: 1
     }
     49% {
-        left: 2rem;
+        transform: translateX(2rem);
         opacity: 0
     }
     51% {
-        left: -2rem;
+        transform: translateX(-2rem);
         opacity: 0
     }
     100% {
-        left: 0;
+        transform: translateX(0);
         opacity: 1
     }
 }
 
+@keyframes num-forwarder {
+    0% {
+        transform: translateY(0);
+        opacity: 1
+    }
+    49% {
+        transform: translateY(0.5rem);
+        opacity: 0
+    }
+    51% {
+        transform: translateY(-0.5rem);
+        opacity: 0
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1
+    }
+}
 
+@keyframes num-backwarder {
+    0% {
+        transform: translateY(0);
+        opacity: 1
+    }
+    49% {
+        transform: translateY(-0.5rem);
+        opacity: 0
+    }
+    51% {
+        transform: translateY(0.5rem);
+        opacity: 0
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1
+    }
+}
 
 .next {
-    position: relative !important;
     animation-name: forwarder;
     animation-duration: 500ms;
 }
 
 .prev {
-    position: relative !important;
-    animation-name: backender;
+    animation-name: backwarder;
     animation-duration: 500ms;
+}
+
+.num-next {
+    animation-name: num-forwarder;
+    animation-duration: 500ms;
+}
+
+.num-prev {
+    animation-name: num-backwarder;
+    animation-duration: 500ms;
+}
+
+.reload:hover {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    cursor: pointer;
 }
