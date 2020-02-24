@@ -21,9 +21,9 @@ function shuffle(array) {
 
 /**
  *
- * @param selectQuestionRange ["pngl","lpng","pial","lpia"]
+ * @param selectQuestionRange ["2y,"2z,"4y,"4z]
  * @constructor
- * @return []{Type:"pngl",Question:"あ",Answer:"a"}
+ * @return []{Type:"2y,Question:"あ",Answer:"a"}
  */
 export function GeneratePaperList(selectQuestionRange) {
     let png = [];
@@ -35,28 +35,28 @@ export function GeneratePaperList(selectQuestionRange) {
         pia.push(lis[2]);
         luo.push(lis[0]);
     }
-    if (selectQuestionRange.includes("pngl")){
+    if (selectQuestionRange.includes("2y")){
         for(let index in png){
             if(png.hasOwnProperty(index)){
-                FinalList.push({Type: "pngl",Question:png[index],Answer:luo[index]})
+                FinalList.push({Type: "2y",Question:png[index],Answer:luo[index]})
             }
         }
-    }    if (selectQuestionRange.includes("lpng")){
+    }    if (selectQuestionRange.includes("2z")){
         for(let index in luo){
             if(luo.hasOwnProperty(index)){
-                FinalList.push({Type: "lpng",Question:luo[index],Answer:png[index]})
+                FinalList.push({Type: "2z",Question:luo[index],Answer:png[index]})
             }
         }
-    }    if (selectQuestionRange.includes("pial")){
+    }    if (selectQuestionRange.includes("4y")){
         for(let index in pia){
             if(pia.hasOwnProperty(index)){
-                FinalList.push({Type: "pial",Question:pia[index],Answer:luo[index]})
+                FinalList.push({Type: "4y",Question:pia[index],Answer:luo[index]})
             }
         }
-    }    if (selectQuestionRange.includes("lpia")){
+    }    if (selectQuestionRange.includes("4z")){
         for(let index in luo){
             if(luo.hasOwnProperty(index)){
-                FinalList.push({Type: "lpia",Question:luo[index],Answer:pia[index]})
+                FinalList.push({Type: "4z",Question:luo[index],Answer:pia[index]})
             }
         }
     }

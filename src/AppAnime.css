@@ -73,26 +73,64 @@
         opacity: 1
     }
 }
+/*标签顺时针旋转*/
+@keyframes tagger-down {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(90deg);
+    }
+}
+@keyframes tagger-up {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-90deg);
+    }
+}
 
-.next {
+.right {
     animation-name: forwarder;
     animation-duration: 500ms;
 }
 
-.prev {
+.left {
     animation-name: backwarder;
     animation-duration: 500ms;
 }
 
-.num-next {
+.down {
     animation-name: num-forwarder;
     animation-duration: 500ms;
 }
 
-.num-prev {
+.up {
     animation-name: num-backwarder;
     animation-duration: 500ms;
 }
+
+.clockwise {
+    padding: 0.2rem 0.5rem;
+    margin: 0.5rem;
+    writing-mode: horizontal-tb;
+    animation-name: tagger-down;
+    animation-duration: 501ms;
+    transform-origin: 0.8rem;
+    color: white;
+}
+
+.anticlockwise {
+    padding: 0.56rem 0.17rem;
+    margin: .6rem .4rem .5rem;
+    writing-mode: vertical-lr;
+    animation-name: tagger-up;
+    animation-duration: 501ms;
+    transform-origin: 1rem .8rem;
+    color: white;
+}
+
 
 .reload:hover {
     -webkit-transform: rotate(360deg);
