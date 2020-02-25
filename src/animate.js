@@ -62,24 +62,15 @@ export default class Animate {
     }
 
     // 这是一个静态方法。它的作用是接受一个Animate对象的列表，然后执行其中的动画！
-    static Execute(setProperty, animations_list) {
-        let init_list = [], half_list =
-            [], end_list = [];
+    static Execute(setState, animations_list) {
         for (let animation of animations_list) {
-            init_list.push(animation.animation[0]);
-            half_list.push(animation.animation[1]);
-            end_list.push(animation.animation[2]);
+            setState(animation.animation[0]);
+            setTimeout(function () {
+                setState(animation.animation[1])
+            },210);
+            setTimeout(function () {
+                setState(animation.animation[2])
+            }, 460);
         }
-        let init_result = Object.assign(...init_list);
-        let half_result = Object.assign(...half_list);
-        let end_result = Object.assign(...end_list);
-        // 谈判破裂，开始执行！
-        setProperty(init_result);
-        setTimeout(function () {
-            setProperty(half_result);
-        }, 250);
-        setTimeout(function () {
-            setProperty(end_result);
-        }, 500)
     }
 }
