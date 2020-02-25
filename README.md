@@ -1,68 +1,47 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 日语练习 平假名/片假名测试练习
 
-## Available Scripts
+https://app.neboer.site
 
-In the project directory, you can run:
+这个小测试应用是用来练习日语的五十音的。界面的截图如下。
 
-### `yarn start`
+![pratice-big.png](https://i.loli.net/2020/02/25/EeZy5GzCbrN8Vtv.png)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![pratice-focus.png](https://i.loli.net/2020/02/25/Ndj2ETDGrPRbetF.png)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+# 用法
 
-### `yarn test`
+选择器组件选择测试题目类型，刷新按钮刷新题目，上一个与下一个切换题目，单击中央卡片空白处显示答案。
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# 特色
+- 这个小程序有丰富的css动画过渡效果，让练习的过程生动了许多。
 
-### `yarn build`
+- 在移动端和桌面端上的显示效果都非常优秀，尤其适合移动设备使用。
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 完全离线运行，程序运行过程中不需要特殊设计的后端服务器，直接编译然后serve就可以使用。
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- 软件中包含四类题型，通过用户自由选择选择混合出题，考察假名-罗马音的互相转换。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 使用React编写，动画适配性较好，并且性能很高。
 
-### `yarn eject`
+- 使用各种开源组件，如awesome-button和react-multi-select，保证程序的呈现效果。
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- 收录平假名、片假名和其浊音形式混合练习，保证效果。
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# 存在的问题
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- 动画的时序受制于CSS的实现效果和js语句的执行时间，在部分低性能设备上有可能造成动画错乱。
+**如果出现这种情况，请开issue报告问题**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- 经常出现“片假名”标签在向上运动成“平假名”的时候，最上面的一条线会不可见的情况。这个问题属于玄学问题，
+到底这个border宽度是1px还是2px的问题将会持续讨论……
 
-## Learn More
+- “平片假名”的标签的旋转并不很自然，在动画结束后有一个短短的突变，让人看起来并不很舒服。
+这个问题是由writing mode导致的，我正在寻找新的解决方法，如果没有，那么只能死磕属性一点一点调了……
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# 继续开发
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- 准备支持浊音/轻音的开关。
 
-### Code Splitting
+- 添加作者信息等底栏。
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- 优化各种显示效果。
